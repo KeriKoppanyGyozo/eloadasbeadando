@@ -3,28 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Pizza</title>
-
-    <Link href="style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
 <header>
     <h1>Web programozás-1 Előadás Házi feladat</h1>
 </header>
+
 <nav>
     <ul>
         <li><a href="index.html">Kezdőoldal</a></li>
         <li><a href="javascript.html">Pizzák</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
     </ul>
 </nav>
+
+<main>
+    <section>
+        <h2>Üdvözöljük a Net Pizzéria Online világában!</h2>
+        <p>A <strong>Net Pizzéria</strong> az innováció és a gasztronómia találkozása. Mi nem csupán pizzát sütünk; egy modern, digitális élményt kínálunk az éhes városlakóknak. Cégünk szakított a hagyományos "beülős" éttermek világával, hogy minden erőforrásunkat a tökéletes tészta titkára és a villámgyors logisztikára fordíthassuk.</p>
+        <p>Online pizzériánk <strong>éjjel-nappal</strong>, az év 365 napján üzemel. Kizárólag prémium minőségű olasz liszttel, érlelt sajtokkal és helyi kistermelőktől származó friss zöldségekkel dolgozunk.</p>
+        <p>Mivel nálunk nincs helyszíni fogyasztás, minden figyelmünket a gyorsaságra és a minőségre fordítjuk. Rendeljen tőlünk, és tapasztalja meg a különbséget!</p>
+    </section>
+
+    <section id="how-to-order" style="display: none;">
+        <hr>
+        <h2>Útmutató a rendeléshez</h2>
+        <p>Rendszerünk a gyorsaságra és a pontosságra épül. Kérjük, kövesse az alábbi három egyszerű lépést a sikeres SMS-rendeléshez:</p>
+
+        <ol>
+            <li>
+                <strong>Válassza ki a pizzát:</strong>
+                Látogasson el a <a href="javascript.html">Pizzák</a> menüpontba, és jegyezze meg a választott pizza pontos nevét.
+            </li>
+            <li>
+                <strong>Írja meg az SMS-t:</strong>
+                Az üzenetnek tartalmaznia kell a pizza nevét és a pontos szállítási címet (emelet és ajtó megjelölésével).
+                <br><em>Példa: "Margherita, 6000 Kecskemét, Példa utca 12, 2. emelet 4. ajtó"</em>
+            </li>
+            <li>
+                <strong>Küldés és visszaigazolás:</strong>
+                Küldje el az üzenetet központi számunkra (+36 20 123 4567). Perceken belül kapni fog egy automatikus választ a várható érkezési idővel.
+            </li>
+        </ol>
+
+        <p><strong>Fontos korlátozás:</strong> Biztonsági és logisztikai okokból <strong>egy SMS-ben csak egyféle pizza</strong> rendelhető. Amennyiben többféle ízt kóstolnának meg, kérjük, küldjenek annyi SMS-t, ahányféle pizzát kérnek.</p>
+
+        <button type="button" onclick="elrejtARendelest()">Bezárás / Elrejtés</button>
+        <hr>
+    </section>
+</main>
+
 <footer>
     Neptun Kód: DAWGZX<br>
     Név: Kéri Koppány Győző
 </footer>
 
+<script>
+    function mutasdARendelest(e) {
+        // Megakadályozza az oldal ugrálását
+        e.preventDefault();
+        var szekcio = document.getElementById("how-to-order");
+        // Megmutatja a rejtett részt
+        szekcio.style.display = "block";
+        // Odagördít
+        szekcio.scrollIntoView({ behavior: 'smooth' });
+    }
 
+    function elrejtARendelest() {
+        // Újra elrejti a szöveget
+        document.getElementById("how-to-order").style.display = "none";
+        // Visszamegy a lap tetejére
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
 
 </body>
 </html>
