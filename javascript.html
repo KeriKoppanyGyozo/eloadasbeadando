@@ -14,11 +14,163 @@
 <nav>
     <ul>
         <li><a href="index.html">Kezdőoldal</a></li>
-        <li><a href="javascript.html">Javascript</a></li>
+        <li><a href="javascript.html">Pizzák</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="#about">About</a></li>
     </ul>
 </nav>
+
+<main>
+    <h2>Pizzák kezelése</h2>
+
+    <form id="pizza-form">
+        <label for="nev">Pizza neve:</label><br>
+        <input type="text" id="nev" required><br><br>
+
+        <label for="kategoria">Kategória:</label><br>
+        <input type="text" id="kategoria" required><br><br>
+
+        <label for="vega">Vegetáriánus:</label>
+        <input type="checkbox" id="vega"><br><br>
+
+        <button type="button" id="mentes-gomb" onclick="mentes()">Hozzáadás</button>
+        <button type="button" onclick="urlapTorles()">Mégse / Űrlap törlése</button>
+    </form>
+
+    <br>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Pizza neve</th>
+            <th>Kategória</th>
+            <th>Vegetáriánus</th>
+            <th>Műveletek</th>
+        </tr>
+        </thead>
+        <tbody id="pizza-lista">
+        </tbody>
+    </table>
+</main>
+
+<script>
+    // 1. Adatok tárolása tömbben
+    let pizzak = [
+        { nev: "Margherita", kategorianev: "Alap", vegetarianus: true },
+        { nev: "Húsimádó", kategorianev: "Prémium", vegetarianus: false },
+        { nev: "Négysajtos", kategorianev: "Klasszikus", vegetarianus: true }
+    ];
+
+    // Globális változó, ami megjegyzi, ha épp szerkesztünk egy pizzát
+    let szerkesztesAlatt = null;
+
+    // READ: Táblázat frissítése és kiíratása
+    function megjelenites() {
+        const tbody = document.getElementById('pizza-lista');
+        tbody.innerHTML = ''; // Előző adatok törlése
+
+        for (let i = 0; i < pizzak.length; i++) {
+            let pizza = pizzak[i];
+            let vegaSzoveg = pizza.vegetarianus ? "Igen" : "Nem";
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${pizza.nev}</td>
+                    <td>${pizza.kategorianev}</td>
+                    <td>${vegaSzoveg}</td>
+                    <td>
+                        <button type="button" onclick="szerkesztes('${pizza.nev}')">Szerkesztés</button>
+                        <button type="button" onclick="torles('${pizza.nev}')">Törlés</button>
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    // CREATE & UPDATE: Új pizza hozzáadása vagy módosítása
+    function mentes() {
+        const nevMezo = document.getElementById('nev').value.trim();
+        const kategoriaMezo = document.getElementById('kategoria').value.trim();
+        const vegaMezo = document.getElementById('vega').checked;
+
+        // Validáció
+        if (nevMezo === "" || kategoriaMezo === "") {
+            alert("A pizza nevének és kategóriájának megadása kötelező!");
+            return;
+        }
+
+        if (szerkesztesAlatt) {
+            // UPDATE: Meglévő adat módosítása
+            let index = pizzak.findIndex(p => p.nev === szerkesztesAlatt);
+            if (index !== -1) {
+                // Ellenőrizzük, hogy az új név nem ütközik-e másikkal (mert a név a kulcs)
+                let letezoMasik = pizzak.find(p => p.nev === nevMezo && p.nev !== szerkesztesAlatt);
+                if (letezoMasik) {
+                    alert("Ez a pizzanév már foglalt!");
+                    return;
+                }
+                pizzak[index] = { nev: nevMezo, kategorianev: kategoriaMezo, vegetarianus: vegaMezo };
+            }
+        } else {
+            // CREATE: Új pizza felvitele
+            let letezo = pizzak.find(p => p.nev === nevMezo);
+            if (letezo) {
+                alert("Ez a pizzanév már létezik! Kérlek adj meg újat.");
+                return;
+            }
+            pizzak.push({ nev: nevMezo, kategorianev: kategoriaMezo, vegetarianus: vegaMezo });
+        }
+
+        // Mentés után ürítjük az űrlapot és frissítjük a táblát
+        urlapTorles();
+        megjelenites();
+    }
+
+    // DELETE: Törlés a név alapján
+    function torles(torlendoNev) {
+        if (confirm("Biztosan törölni szeretnéd a(z) " + torlendoNev + " pizzát?")) {
+            pizzak = pizzak.filter(p => p.nev !== torlendoNev);
+            megjelenites();
+        }
+    }
+
+    // UPDATE ELŐKÉSZÍTÉS: Adatok betöltése az űrlapba
+    function szerkesztes(szerkesztendoNev) {
+        let pizza = pizzak.find(p => p.nev === szerkesztendoNev);
+        if (pizza) {
+            document.getElementById('nev').value = pizza.nev;
+            document.getElementById('kategoria').value = pizza.kategorianev;
+            document.getElementById('vega').checked = pizza.vegetarianus;
+
+            szerkesztesAlatt = pizza.nev;
+            document.getElementById('mentes-gomb').innerText = "Módosítás mentése";
+        }
+    }
+
+    // Űrlap kiürítése és alaphelyzetbe állítása
+    function urlapTorles() {
+        document.getElementById('nev').value = '';
+        document.getElementById('kategoria').value = '';
+        document.getElementById('vega').checked = false;
+
+        szerkesztesAlatt = null;
+        document.getElementById('mentes-gomb').innerText = "Hozzáadás";
+    }
+
+    // Oldal betöltésekor mutassa a táblázatot
+    window.onload = megjelenites;
+</script>
+
+
+
+
+
+
+
+
+
+
+
 <footer>
     Neptun Kód: DAWGZX<br>
     Név: Kéri Koppány Győző
