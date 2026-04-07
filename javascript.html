@@ -15,6 +15,7 @@
     <ul>
         <li><a href="index.html">Kezdőoldal</a></li>
         <li><a href="javascript.html">Pizzák</a></li>
+        <li><a href="fetchapi.html">Élő kínálat</a></li>
         <li><a href="#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
     </ul>
 </nav>
@@ -86,7 +87,7 @@
         }
     }
 
-    // CREATE & UPDATE: Új pizza hozzáadása vagy módosítása
+    // Új pizza hozzáadása vagy módosítása
     function mentes() {
         const nevMezo = document.getElementById('nev').value.trim();
         const kategoriaMezo = document.getElementById('kategoria').value.trim();
@@ -99,10 +100,10 @@
         }
 
         if (szerkesztesAlatt) {
-            // UPDATE: Meglévő adat módosítása
+            //  Meglévő adat módosítása
             let index = pizzak.findIndex(p => p.nev === szerkesztesAlatt);
             if (index !== -1) {
-                // Ellenőrizzük, hogy az új név nem ütközik-e másikkal (mert a név a kulcs)
+                // Ellenőrizzük, hogy az új név nem ütközik-e másikkal
                 let letezoMasik = pizzak.find(p => p.nev === nevMezo && p.nev !== szerkesztesAlatt);
                 if (letezoMasik) {
                     alert("Ez a pizzanév már foglalt!");
@@ -120,12 +121,12 @@
             pizzak.push({ nev: nevMezo, kategorianev: kategoriaMezo, vegetarianus: vegaMezo });
         }
 
-        // Mentés után ürítjük az űrlapot és frissítjük a táblát
+        // Mentés után ürítjük, frissítjük a táblát
         urlapTorles();
         megjelenites();
     }
 
-    // DELETE: Törlés a név alapján
+    //  Törlés a név alapján
     function torles(torlendoNev) {
         if (confirm("Biztosan törölni szeretnéd a(z) " + torlendoNev + " pizzát?")) {
             pizzak = pizzak.filter(p => p.nev !== torlendoNev);
@@ -133,7 +134,7 @@
         }
     }
 
-    // UPDATE ELŐKÉSZÍTÉS: Adatok betöltése az űrlapba
+    //  Adatok betöltése az űrlapba
     function szerkesztes(szerkesztendoNev) {
         let pizza = pizzak.find(p => p.nev === szerkesztendoNev);
         if (pizza) {

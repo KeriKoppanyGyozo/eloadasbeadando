@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza - Élő kínálat</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<header><h1>Web programozás-1 Előadás Házi feladat</h1></header>
+<nav>
+    <ul>
+        <li><a href="index.html">Kezdőoldal</a></li>
+        <li><a href="javascript.html">Pizzák</a></li>
+        <li><a href="fetchapi.html">Élő kínálat</a></li>
+        <li><a href="#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section>
+        <h2>Friss kínálatunk</h2>
+
+        <form id="api-form">
+            <input type="text" id="api_nev" placeholder="Pizza neve" required>
+            <input type="text" id="api_kat" placeholder="Kategória" required>
+            <button type="button" onclick="adatotKuldeni()">Hozzáadás az élő kínálathoz</button>
+        </form>
+        <table border="1" style="width:100%; margin-top:20px;">
+            <thead><tr><th>Név</th><th>Kategória</th><th>Művelet</th></tr></thead>
+            <tbody id="api-lista"></tbody>
+        </table>
+    </section>
+</main>
+
+<footer>Neptun Kód: DAWGZX | Név: Kéri Koppány Győző</footer>
+
+<script>
+    const API_URL = 'pizzak_api.php';
+
+    async function frissit() {
+        const res = await fetch(API_URL);
+        const adatok = await res.json();
+        const tbody = document.getElementById('api-lista');
+        tbody.innerHTML = adatok.map(p => `
+            <tr>
+                <td>${p.nev}</td>
+                <td>${p.kat}</td>
+                <td><button onclick="torol('${p.nev}')" style="background-color: #c0392b;">Törlés</button></td>
+            </tr>
+        `).join('');
+    }
+
+    async function adatotKuldeni() {
+        const nev = document.getElementById('api_nev').value;
+        const kat = document.getElementById('api_kat').value;
+        if(!nev || !kat) return alert("Minden mezőt tölts ki!");
+
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ action: "add", nev: nev, kat: kat })
+        });
+        document.getElementById('api-form').reset();
+        frissit();
+    }
+
+    async function torol(pizzaNev) {
+        if(!confirm("Töröljük a(z) " + pizzaNev + " pizzát?")) return;
+
+        await fetch(API_URL, {
+            method: 'POST', // POST-ot használu a nagyobb kompatibilitásért
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ action: "delete", nev: pizzaNev })
+        });
+        frissit();
+    }
+
+    function mutasdARendelest(e) {
+        e.preventDefault();
+        window.location.href = "index.html#how-to-order";
+    }
+
+    window.onload = frissit;
+</script>
+</body>
+</html>

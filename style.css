@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+
 nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: darkgreen;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Kiegészítés: enyhe árnyék a menü alatt */
 }
 
 nav ul li {
@@ -14,42 +18,103 @@ nav ul li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 14px 20px; /* Kicsit szélesebb padding */
     text-decoration: none;
+    font-family: 'Montserrat', sans-serif; /* Igényesebb betűtípus */
+    transition: 0.3s; /* Finom átmenet */
 }
 
 nav ul li a:hover {
     background-color: #111111;
 }
-html, body
-{
+
+html, body {
     height: 100%;
 }
-body
-{
+
+body {
     margin: 0;
     padding: 0;
     background-color: #FFFBFE;
     width: 100%;
     display: table;
+    font-family: 'Roboto', sans-serif; /* Olvashatóbb szövegtípus */
 }
-header
-{
+
+header {
     background-color: #FFD23F;
     text-align: center;
-
+    padding: 20px 0; /* Több hely a címnek */
+    border-bottom: 4px solid #c0392b; /* Egy vékony piros "paradicsom" csík a díszítésnek */
 }
-main
-{
+
+header h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 2px;
+}
+
+main {
     display: table-row;
     height: 100%;
 }
-footer
-{
+
+footer {
     display: table-row;
     height: 60px;
     text-align: center;
     vertical-align: middle;
     background-color: #0C090D;
     color: #FFFBFE;
+    font-size: 0.9em;
+}
+
+
+
+/* A szöveges tartalom tárolója */
+section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 10px; /* Lekerekített sarkok */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* mélységérzet */
+    line-height: 1.6; /* Kényelmesebb sorköz az olvasáshoz */
+}
+
+/* A "Hogyan rendeljek?" rejtett szekció egyedi stílusa */
+#how-to-order {
+    border: 2px dashed #FFD23F; /* Szaggatott sárga keret */
+    background-color: #fffdf5;
+}
+
+/* A Bezárás gomb formázása  */
+button {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: darkgreen; /* Kattintás előtt piros, hoverre zöld lesz */
+}
+
+/* Kiemelések a szövegben */
+strong {
+    color: #c0392b; /* A fontos szavak legyenek pirosak */
+}
+
+/* Listák stílusa a szövegen belül */
+main ul, main ol {
+    padding-left: 20px;
+}
+
+main li {
+    margin-bottom: 10px;
 }
