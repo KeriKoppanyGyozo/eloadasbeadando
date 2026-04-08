@@ -70,7 +70,7 @@
         if(!confirm("Töröljük a(z) " + pizzaNev + " pizzát?")) return;
 
         await fetch(API_URL, {
-            method: 'POST', // POST-ot használunk a nagyobb kompatibilitásért
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ action: "delete", nev: pizzaNev })
         });
