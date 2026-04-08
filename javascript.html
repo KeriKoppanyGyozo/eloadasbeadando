@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Pizza</title>
-
-    <Link href="style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
 <header>
     <h1>Web programozás-1 Előadás Házi feladat</h1>
 </header>
+
 <nav>
     <ul>
         <li><a href="index.html">Kezdőoldal</a></li>
         <li><a href="javascript.html">Pizzák</a></li>
         <li><a href="fetchapi.html">Élő kínálat</a></li>
-        <li><a href="#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
+        <li><a href="react.html">Rendelések kezelés</a></li>
+        <li><a href="index.html#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
     </ul>
 </nav>
 
@@ -54,11 +55,37 @@
 </main>
 
 <script>
+
     // 1. Adatok tárolása tömbben
     let pizzak = [
-        { nev: "Margherita", kategorianev: "Alap", vegetarianus: true },
-        { nev: "Húsimádó", kategorianev: "Prémium", vegetarianus: false },
-        { nev: "Négysajtos", kategorianev: "Klasszikus", vegetarianus: true }
+        { nev: "Áfonyás", kategorianev: "király", vegetarianus: false },
+        { nev: "Babos", kategorianev: "lovag", vegetarianus: false },
+        { nev: "Barbecue chicken", kategorianev: "lovag", vegetarianus: false },
+        { nev: "Betyáros", kategorianev: "király", vegetarianus: false },
+        { nev: "Caribi", kategorianev: "apród", vegetarianus: false },
+        { nev: "Country", kategorianev: "király", vegetarianus: false },
+        { nev: "Csabesz", kategorianev: "király", vegetarianus: false },
+        { nev: "Csupa sajt", kategorianev: "lovag", vegetarianus: true },
+        { nev: "Erdő kapitánya", kategorianev: "apród", vegetarianus: false },
+        { nev: "Erős János", kategorianev: "lovag", vegetarianus: false },
+        { nev: "Excellent", kategorianev: "király", vegetarianus: false },
+        { nev: "Főnök kedvence", kategorianev: "lovag", vegetarianus: false },
+        { nev: "Francia", kategorianev: "főnemes", vegetarianus: false },
+        { nev: "Frankfurti", kategorianev: "király", vegetarianus: false },
+        { nev: "Füstös", kategorianev: "lovag", vegetarianus: false },
+        { nev: "Gombás", kategorianev: "apród", vegetarianus: true },
+        { nev: "Görög", kategorianev: "király", vegetarianus: false },
+        { nev: "Hawaii", kategorianev: "főnemes", vegetarianus: false },
+        { nev: "Juhtúrós", kategorianev: "lovag", vegetarianus: false },
+        { nev: "Magyaros", kategorianev: "lovag", vegetarianus: false },
+        { nev: "Mexikói", kategorianev: "főnemes", vegetarianus: false },
+        { nev: "Négysajtos", kategorianev: "király", vegetarianus: true },
+        { nev: "Popey", kategorianev: "király", vegetarianus: false },
+        { nev: "Sajtos", kategorianev: "apród", vegetarianus: true },
+        { nev: "Sonkás", kategorianev: "apród", vegetarianus: false },
+        { nev: "Szalámis", kategorianev: "apród", vegetarianus: false },
+        { nev: "Tenger gyümölcsei", kategorianev: "király", vegetarianus: false },
+        { nev: "Vega", kategorianev: "lovag", vegetarianus: true }
     ];
 
     // Globális változó, ami megjegyzi, ha épp szerkesztünk egy pizzát
@@ -155,6 +182,12 @@
 
         szerkesztesAlatt = null;
         document.getElementById('mentes-gomb').innerText = "Hozzáadás";
+    }
+
+    // EZ A FÜGGVÉNY HIÁNYZOTT INNEN!
+    function mutasdARendelest(e) {
+        e.preventDefault();
+        window.location.href = "index.html#how-to-order";
     }
 
     // Oldal betöltésekor mutassa a táblázatot
