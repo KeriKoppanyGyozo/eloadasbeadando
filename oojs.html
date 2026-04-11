@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza - OOJS Grafika</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1>Web programozás-1 Előadás Házi feladat</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Kezdőoldal</a></li>
+        <li><a href="javascript.html">Pizzák</a></li>
+        <li><a href="oojs.html">Grafika (OOJS)</a></li>
+        <li><a href="fetchapi.html">Élő kínálat</a></li>
+        <li><a href="react.html">Rendelések kezelés</a></li>
+        <li><a href="index.html#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section>
+        <h2>Objektumorientált Pizza Eső (OOJS)</h2>
+        <p>Ez az oldal demonstrálja az <strong>OOJS</strong> képességeket. Egy szülőosztály (GrafikusElem) és egy abból örököltetett gyerekosztály (PizzaSzelet) gondoskodik a DOM elemek dinamikus generálásáról és mozgatásáról.</p>
+
+        <button type="button" onclick="ujSzelet()" style="background-color: darkgreen; margin-bottom: 10px;">+ Új pizza szelet bedobása</button>
+
+        <div id="canvas-container"></div>
+    </section>
+</main>
+
+<footer>
+    Neptun Kód: DAWGZX<br>
+    Név: Kéri Koppány Győző
+</footer>
+
+<script>
+
+    class GrafikusElem {
+        constructor(jel) {
+            this.element = document.createElement('div');
+            this.element.innerHTML = jel;
+            this.element.className = 'pizza-slice';
+
+            this.x = Math.random() * (document.getElementById('canvas-container').offsetWidth - 50);
+            this.y = -50;
+            this.sebesseg = 1 + Math.random() * 3;
+
+
+            document.getElementById('canvas-container').appendChild(this.element);
+        }
+
+        mozog() {
+            this.y += this.sebesseg;
+            this.element.style.left = this.x + 'px';
+            this.element.style.top = this.y + 'px';
+        }
+    }
+
+
+    class PizzaSzelet extends GrafikusElem {
+        constructor() {
+            super('🍕');
+            this.forgas = 0;
+            this.forgasSebesseg = Math.random() * 5;
+        }
+
+
+        mozog() {
+            super.mozog();
+
+
+            this.forgas += this.forgasSebesseg;
+            this.element.style.transform = `rotate(${this.forgas}deg)`;
+
+
+            if (this.y > 500) {
+                this.y = -50;
+                this.x = Math.random() * (document.getElementById('canvas-container').offsetWidth - 50);
+            }
+        }
+    }
+
+    let elemek = [];
+
+
+    function ujSzelet() {
+        elemek.push(new PizzaSzelet());
+    }
+
+
+    function animacio() {
+        elemek.forEach(obj => obj.mozog());
+        requestAnimationFrame(animacio);
+    }
+
+
+    for(let i=0; i<5; i++) {
+        ujSzelet();
+    }
+
+
+    animacio();
+
+    function mutasdARendelest(e) {
+        e.preventDefault();
+        window.location.href = "index.html#how-to-order";
+    }
+</script>
+</body>
+</html>
