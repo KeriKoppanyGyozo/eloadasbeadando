@@ -136,12 +136,27 @@ main li {
     user-select: none; /* Ne lehessen kijelölni egérrel */
     z-index: 10;
 }
-/* --- Főoldali logó stílusa --- */
+/* --- Főoldal Kétoszlopos Elrendezés (Flexbox) --- */
+.fooldal-elrendezes {
+    display: flex; /* Egymás mellé teszi a dobozokat */
+    align-items: center; /* Középre igazítja őket függőlegesen */
+    justify-content: space-between; /* Kitolja őket a szélekre */
+    gap: 30px; /* Távolság a szöveg és a kép között */
+}
+
+.szoveg-doboz {
+    flex: 1; /* A szöveg kitölti az összes maradék helyet */
+}
+
 .fokep {
-    float: right; /* Jobb oldalra igazítja */
-    width: 250px; /* Nem lesz túl nagy */
-    margin-left: 20px; /* Távolság a szövegtől balra */
-    margin-bottom: 10px; /* Távolság a szövegtől alul */
-    border-radius: 10px; /* Kicsit lekerekíti a sarkait */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Ad neki egy kis árnyékot */
+    width: 200px; /* Itt tudod állítani a kép méretét */
+    border-radius: 8px; /* Lekerekített sarkok */
+    flex-shrink: 0; /* Megakadályozza, hogy a szöveg összenyomja a képet */
+}
+
+/* Mobilnézeten (kisebb képernyőn) egymás alá ugranak */
+@media (max-width: 768px) {
+    .fooldal-elrendezes {
+        flex-direction: column;
+    }
 }

@@ -15,7 +15,7 @@
     <ul>
         <li><a href="index.html">Kezdőoldal</a></li>
         <li><a href="javascript.html">Pizzák</a></li>
-        <li><a href="oojs.html">Grafika (OOJS)</a></li>
+        <li><a href="oojs.html">Pizza Bumm!</a></li>
         <li><a href="fetchapi.html">Élő kínálat</a></li>
         <li><a href="react.html">Rendelések kezelés</a></li>
         <li><a href="index.html#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
@@ -93,11 +93,13 @@
     let szerkesztesAlatt = null;
 
 
-    function megjelenites() {
+    function megjelenites()
+    {
         const tbody = document.getElementById('pizza-lista');
-        tbody.innerHTML = ''; // Előző adatok törlése
+        tbody.innerHTML = '';
 
-        for (let i = 0; i < pizzak.length; i++) {
+        for (let i = 0; i < pizzak.length; i++)
+        {
             let pizza = pizzak[i];
             let vegaSzoveg = pizza.vegetarianus ? "Igen" : "Nem";
 
@@ -116,54 +118,55 @@
     }
 
 
-    function mentes() {
+    function mentes()
+    {
         const nevMezo = document.getElementById('nev').value.trim();
         const kategoriaMezo = document.getElementById('kategoria').value.trim();
         const vegaMezo = document.getElementById('vega').checked;
 
-
-        if (nevMezo === "" || kategoriaMezo === "") {
+        if (nevMezo === "" || kategoriaMezo === "")
+        {
             alert("A pizza nevének és kategóriájának megadása kötelező!");
             return;
         }
-
-        if (szerkesztesAlatt) {
-
+        if (szerkesztesAlatt)
+        {
             let index = pizzak.findIndex(p => p.nev === szerkesztesAlatt);
-            if (index !== -1) {
-
+            if (index !== -1)
+            {
                 let letezoMasik = pizzak.find(p => p.nev === nevMezo && p.nev !== szerkesztesAlatt);
-                if (letezoMasik) {
+                if (letezoMasik)
+                {
                     alert("Ez a pizzanév már foglalt!");
                     return;
                 }
                 pizzak[index] = { nev: nevMezo, kategorianev: kategoriaMezo, vegetarianus: vegaMezo };
             }
-        } else {
-
+        } else
+        {
             let letezo = pizzak.find(p => p.nev === nevMezo);
-            if (letezo) {
+            if (letezo)
+            {
                 alert("Ez a pizzanév már létezik! Kérlek adj meg újat.");
                 return;
             }
             pizzak.push({ nev: nevMezo, kategorianev: kategoriaMezo, vegetarianus: vegaMezo });
         }
-
-
         urlapTorles();
         megjelenites();
     }
-
-
-    function torles(torlendoNev) {
-        if (confirm("Biztosan törölni szeretnéd a(z) " + torlendoNev + " pizzát?")) {
+    function torles(torlendoNev)
+    {
+        if (confirm("Biztosan törölni szeretnéd a(z) " + torlendoNev + " pizzát?"))
+        {
             pizzak = pizzak.filter(p => p.nev !== torlendoNev);
             megjelenites();
         }
     }
 
 
-    function szerkesztes(szerkesztendoNev) {
+    function szerkesztes(szerkesztendoNev)
+    {
         let pizza = pizzak.find(p => p.nev === szerkesztendoNev);
         if (pizza) {
             document.getElementById('nev').value = pizza.nev;
@@ -176,7 +179,8 @@
     }
 
 
-    function urlapTorles() {
+    function urlapTorles()
+    {
         document.getElementById('nev').value = '';
         document.getElementById('kategoria').value = '';
         document.getElementById('vega').checked = false;
@@ -186,7 +190,8 @@
     }
 
 
-    function mutasdARendelest(e) {
+    function mutasdARendelest(e)
+    {
         e.preventDefault();
         window.location.href = "index.html#how-to-order";
     }
@@ -207,10 +212,12 @@
 
 <footer>
     Neptun Kód: DAWGZX<br>
-    Név: Kéri Koppány Győző
+    Név: Kéri Koppány Győző<br>
+    Neptun Kód: CJD0W2<br>
+    Név: Zoltán Hidvégi
 </footer>
 
 
-
+<script src="pizza-effekt.js?v=1"></script>
 </body>
 </html>

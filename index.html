@@ -15,7 +15,7 @@
     <ul>
         <li><a href="index.html">Kezdőoldal</a></li>
         <li><a href="javascript.html">Pizzák</a></li>
-        <li><a href="oojs.html">Grafika (OOJS)</a></li>
+        <li><a href="oojs.html">Pizza Bumm!</a></li>
         <li><a href="fetchapi.html">Élő kínálat</a></li>
         <li><a href="react.html">Rendelések kezelés</a></li>
         <li><a href="index.html#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
@@ -23,21 +23,21 @@
 </nav>
 
 <main>
-    <section>
-        <img src="logo.png" alt="Pizza Online Logó" class="fokep">
+    <section class="fooldal-elrendezes">
 
-        <h2>Üdvözöljük a Net Pizzéria Online világában!</h2>
-        <p>A <strong>Net Pizzéria</strong> az innováció és a gasztronómia találkozása. Mi nem csupán pizzát sütünk; egy modern, digitális élményt kínálunk az éhes városlakóknak. Cégünk szakított a hagyományos "beülős" éttermek világával, hogy minden erőforrásunkat a tökéletes tészta titkára és a villámgyors logisztikára fordíthassuk.</p>
-        <p>Online pizzériánk <strong>éjjel-nappal</strong>, az év 365 napján üzemel. Kizárólag prémium minőségű olasz liszttel, érlelt sajtokkal és helyi kistermelőktől származó friss zöldségekkel dolgozunk.</p>
-        <p>Mivel nálunk nincs helyszíni fogyasztás, minden figyelmünket a gyorsaságra és a minőségre fordítjuk. Rendeljen tőlünk, és tapasztalja meg a különbséget!</p>
+        <div class="szoveg-doboz">
+            <h2>Üdvözöljük a Net Pizzéria Online világában!</h2>
+            <p>A <strong>Net Pizzéria</strong> az innováció és a gasztronómia találkozása. Mi nem csupán pizzát sütünk; egy modern, digitális élményt kínálunk az éhes városlakóknak. Cégünk szakított a hagyományos "beülős" éttermek világával, hogy minden erőforrásunkat a tökéletes tészta titkára és a villámgyors logisztikára fordíthassuk.</p>
+            <p>Online pizzériánk <strong>éjjel-nappal</strong>, az év 365 napján üzemel. Kizárólag prémium minőségű olasz liszttel, érlelt sajtokkal és helyi kistermelőktől származó friss zöldségekkel dolgozunk.</p>
+            <p>Mivel nálunk nincs helyszíni fogyasztás, minden figyelmünket a gyorsaságra és a minőségre fordítjuk. Rendeljen tőlünk, és tapasztalja meg a különbséget!</p>
+        </div>
+
+        <div class="kep-doboz">
+            <img src="logo.png" alt="Pizza Online Logó" class="fokep">
+        </div>
+
     </section>
 
-    <section>
-        <h2>Üdvözöljük a Net Pizzéria Online világában!</h2>
-        <p>A <strong>Net Pizzéria</strong> az innováció és a gasztronómia találkozása. Mi nem csupán pizzát sütünk; egy modern, digitális élményt kínálunk az éhes városlakóknak. Cégünk szakított a hagyományos "beülős" éttermek világával, hogy minden erőforrásunkat a tökéletes tészta titkára és a villámgyors logisztikára fordíthassuk.</p>
-        <p>Online pizzériánk <strong>éjjel-nappal</strong>, az év 365 napján üzemel. Kizárólag prémium minőségű olasz liszttel, érlelt sajtokkal és helyi kistermelőktől származó friss zöldségekkel dolgozunk.</p>
-        <p>Mivel nálunk nincs helyszíni fogyasztás, minden figyelmünket a gyorsaságra és a minőségre fordítjuk. Rendeljen tőlünk, és tapasztalja meg a különbséget!</p>
-    </section>
 
     <section id="how-to-order" style="display: none;">
         <hr>
@@ -69,11 +69,14 @@
 
 <footer>
     Neptun Kód: DAWGZX<br>
-    Név: Kéri Koppány Győző
+    Név: Kéri Koppány Győző<br>
+    Neptun Kód: CJD0W2<br>
+    Név: Zoltán Hidvégi
 </footer>
 
 <script>
-    function mutasdARendelest(e) {
+    function mutasdARendelest(e)
+    {
 
         e.preventDefault();
         var szekcio = document.getElementById("how-to-order");
@@ -83,13 +86,14 @@
         szekcio.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function elrejtARendelest() {
+    function elrejtARendelest()
+    {
 
         document.getElementById("how-to-order").style.display = "none";
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
-
+<script src="pizza-effekt.js?v=1"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@
     <ul>
         <li><a href="index.html">Kezdőoldal</a></li>
         <li><a href="javascript.html">Pizzák</a></li>
-        <li><a href="oojs.html">Grafika (OOJS)</a></li>
+        <li><a href="oojs.html">Pizza Bumm!</a></li>
         <li><a href="fetchapi.html">Élő kínálat</a></li>
         <li><a href="react.html">Rendelések kezelés</a></li>
         <li><a href="index.html#how-to-order" onclick="mutasdARendelest(event)">Hogyan rendeljek?</a></li>
@@ -29,13 +29,16 @@
 
 <footer>
     Neptun Kód: DAWGZX<br>
-    Név: Kéri Koppány Győző
+    Név: Kéri Koppány Győző<br>
+    Neptun Kód: CJD0W2<br>
+    Név: Zoltán Hidvégi
 </footer>
 
 <script type="text/babel">
     const { useState } = React;
 
-    function RendelesKezelo() {
+    function RendelesKezelo()
+    {
 
         const [rendelesek, setRendelesek] = useState([
             { id: 1, nev: "Popey", db: 2, felvetel: "2005.11.12 11:21:00", kiszallitas: "2005.11.12 12:11:00" },
@@ -47,19 +50,22 @@
 
         const [form, setForm] = useState({ id: null, nev: '', db: '', felvetel: '', kiszallitas: '' });
 
-        const mentes = (e) => {
+        const mentes = (e) =>
+        {
             e.preventDefault();
             if(!form.nev || !form.db) {
                 alert("A pizza nevét és a darabszámot kötelező megadni!");
                 return;
             }
 
-            if (form.id) {
+            if (form.id)
+            {
 
                 setRendelesek(rendelesek.map(r => r.id === form.id ? form : r));
             } else {
 
-                setRendelesek([...rendelesek, {
+                setRendelesek([...rendelesek,
+                    {
                     ...form,
                     id: Date.now(),
                     felvetel: form.felvetel || new Date().toLocaleString()
@@ -68,7 +74,8 @@
             setForm({ id: null, nev: '', db: '', felvetel: '', kiszallitas: '' });
         };
 
-        const torles = (id) => {
+        const torles = (id) =>
+        {
             if(confirm("Biztosan törli ezt a rendelést?")) {
                 setRendelesek(rendelesek.filter(r => r.id !== id));
             }
@@ -121,10 +128,12 @@
     ReactDOM.createRoot(document.getElementById('react-app')).render(<RendelesKezelo />);
 
 
-    function mutasdARendelest(e) {
+    function mutasdARendelest(e)
+    {
         e.preventDefault();
         window.location.href = "index.html#how-to-order";
     }
 </script>
+<script src="pizza-effekt.js?v=1"></script>
 </body>
 </html>
